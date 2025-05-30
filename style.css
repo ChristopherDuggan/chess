@@ -6,6 +6,11 @@
   grid: repeat(8, 1fr) / repeat(8, 1fr);
 }
 
+.square {
+  display:  flex;
+  align-items: flex-end;
+}
+
 .light {
   height: 100%;
   background: #d3c0cd;
