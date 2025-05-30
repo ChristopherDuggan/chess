@@ -1,0 +1,16 @@
+#board-display {
+  max-width: 80vw;
+  max-height: 80vh;
+  aspect-ratio: 1/1;
+  display: grid;
+  grid: repeat(8, 1fr) / repeat(8, 1fr);
+}
+
+.light {
+  height: 100%;
+  background: #d3c0cd;
+}
+
+.dark {
+  background: #937666;
+}
