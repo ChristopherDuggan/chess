@@ -29,3 +29,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.flipped {
+  transform: scale(1, -1);
+}

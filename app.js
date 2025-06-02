@@ -1,11 +1,12 @@
 const board = new Array(64)
+let flipped = false;
 
 // white pieces
 board[0] = board[7] = 'wR';
 board[1] = board[6] = 'wN';
 board[2] = board[5] = 'wB';
-board[3] = 'wK';
-board[4] = 'wQ';
+board[3] = 'wQ';
+board[4] = 'wK';
 for (let i = 8; i < 16; i++) {
   board[i] = 'wP';
 }
@@ -17,8 +18,8 @@ for (let i = 48; i < 56; i++) {
 board[56] = board[63] = 'bR';
 board[57] = board[62] = 'bN';
 board[58] = board[61] = 'bB';
-board[59] = 'bK';
-board[60] = 'bQ';
+board[59] = 'bQ';
+board[60] = 'bK';
 
 const boardDisplay = document.querySelector('#board-display');
 
@@ -39,5 +40,12 @@ for (let i = 0; i < board.length; i++) {
     square.appendChild(piece);
   }
   boardDisplay.appendChild(square)
+}
+
+const squares = document.querySelectorAll('.square');
+
+if (flipped) {
+  boardDisplay.classList.add('flipped');
+  squares.forEach(square => square.classList.add('flipped'));
 }
 
