@@ -35,6 +35,7 @@ for (let i = 0; i < board.length; i++) {
   if (board[i]) {
     const piece = document.createElement('img');
     piece.src = `images/${board[i]}.svg`;
+    piece.classList.add('piece');
     square.appendChild(piece);
   }
   boardDisplay.appendChild(square)

@@ -9,6 +9,7 @@
 .square {
   display:  flex;
   align-items: flex-end;
+  position: relative;
 }
 
 .light {
@@ -18,4 +19,13 @@
 
 .dark {
   background: #937666;
+}
+
+.piece {
+  position: absolute;
+  height: 90%;
+  width: 90%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
