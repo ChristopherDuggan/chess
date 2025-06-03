@@ -44,8 +44,14 @@ for (let i = 0; i < board.length; i++) {
 
 const squares = document.querySelectorAll('.square');
 
-if (flipped) {
-  boardDisplay.classList.add('flipped');
-  squares.forEach(square => square.classList.add('flipped'));
-}
+const flipBoard = function() {
+    boardDisplay.classList.toggle('flipped');
+    squares.forEach(square => square.classList.toggle('flipped'));
+};
 
+const flipButton = document.createElement('button');
+flipButton.textContent = 'flip board';
+document.querySelector('body').appendChild(flipButton);
+flipButton.addEventListener('click', flipBoard);
+
+flipBoard();
