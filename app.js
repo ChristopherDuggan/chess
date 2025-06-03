@@ -33,9 +33,11 @@ for (let i = 0; i < board.length; i++) {
     square.classList.add('dark');
   }
   square.textContent = String.fromCharCode(row + 97) + ((i % 8) + 1);
+  square.id = i;
   if (board[i]) {
     const piece = document.createElement('img');
     piece.src = `images/${board[i]}.svg`;
+    piece.id = board[i] + i;
     piece.classList.add('piece');
     square.appendChild(piece);
   }
@@ -55,3 +57,4 @@ document.querySelector('body').appendChild(flipButton);
 flipButton.addEventListener('click', flipBoard);
 
 flipBoard();
+
