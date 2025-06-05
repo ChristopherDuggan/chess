@@ -1,5 +1,5 @@
 const board = new Array(64)
-let flipped = true;
+const move = [];
 
 // white pieces
 board[0] = board[7] = 'wR';
@@ -37,7 +37,7 @@ for (let i = 0; i < board.length; i++) {
   if (board[i]) {
     const piece = document.createElement('img');
     piece.src = `images/${board[i]}.svg`;
-    piece.id = board[i] + i;
+    piece.id = board[i] + ' ' + i;
     piece.classList.add('piece');
     square.appendChild(piece);
   }
@@ -58,3 +58,32 @@ flipButton.addEventListener('click', flipBoard);
 
 flipBoard();
 
+const boardClick = function(e) {
+  if (move.length === 0 && e.target.nodeName === 'IMG') {
+    move.push(e.target.id)
+  } else if (move.length === 1) {
+    move.push(e.target.id)
+  };
+
+  if (move.length === 2) {
+    const [piece, index1] = move[0].split(' ');
+    const destination = move[1].split(' ');
+    const index2 = destination[0];
+    board[index2] = piece;
+    board[index1] = null;
+    for (let i = 0; i < board.length; i++) {
+      const row = Math.floor(i/8);
+      if (board[i]) {
+        const piece = document.createElement('img');
+        piece.src = `images/${board[i]}.svg`;
+        piece.id = board[i] + ' ' + i;
+        piece.classList.add('piece');
+        squares[i].appendChild(piece);
+      } else {
+        squares[i].innerHTML = String.fromCharCode(row + 97) + ((i % 8) + 1);
+      }
+    }
+    move.length = 0;
+  };
+};
+boardDisplay.addEventListener('click', boardClick);

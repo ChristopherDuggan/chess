@@ -1,3 +1,6 @@
+* {
+  box-sizing: border-box;
+}
 #board-display {
   max-width: 80vw;
   max-height: 80vh;
@@ -7,9 +10,8 @@
 }
 
 .square {
-  display:  flex;
-  align-items: flex-end;
   position: relative;
+  padding: 5px;
 }
 
 .light {
@@ -23,8 +25,8 @@
 
 .piece {
   position: absolute;
-  height: 90%;
-  width: 90%;
+  height: 100%;
+  width: 100%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
