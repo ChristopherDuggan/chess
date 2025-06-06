@@ -68,19 +68,24 @@ const boardClick = function(e) {
   if (move.length === 2) {
     const [piece, index1] = move[0].split(' ');
     const destination = move[1].split(' ');
-    const index2 = destination[0];
+    let index2;
+    if (destination.length === 2) {
+      index2 = destination[1];
+    } else {
+      index2 = destination[0];
+    }
     board[index2] = piece;
     board[index1] = null;
+
     for (let i = 0; i < board.length; i++) {
       const row = Math.floor(i/8);
+      squares[i].innerHTML = String.fromCharCode(row + 97) + (( i % 8) + 1);
       if (board[i]) {
         const piece = document.createElement('img');
         piece.src = `images/${board[i]}.svg`;
         piece.id = board[i] + ' ' + i;
         piece.classList.add('piece');
         squares[i].appendChild(piece);
-      } else {
-        squares[i].innerHTML = String.fromCharCode(row + 97) + ((i % 8) + 1);
       }
     }
     move.length = 0;
