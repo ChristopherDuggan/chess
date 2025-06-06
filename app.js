@@ -64,8 +64,16 @@ const isLegal = function(piece, index1, index2) {
   switch (piece) {
     case 'wP':
       if (index2 === index1 + 8) return true;
+      if (index2 === index1 + 16
+        && index1 > 7
+        && index1 < 16) return true;
+      break;
     case 'bP':
       if (index2 === index1 - 8) return true;
+      if (index2 === index1 - 16
+        && index1 < 56
+        && index1 > 47) return true;
+      break;
   }
   return false
 
