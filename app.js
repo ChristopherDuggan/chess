@@ -69,6 +69,9 @@ const isLegal = function(piece, index1, index2) {
         && index1 > 7
         && index1 < 16
         && !board[index2]) return true;
+      if (board[index2]
+      && (index2 === index1 + 7
+      || index2 === index1 + 9)) return true;
       break;
     case 'bP':
       if (index2 === index1 - 8
@@ -77,6 +80,9 @@ const isLegal = function(piece, index1, index2) {
         && index1 < 56
         && index1 > 47
         && !board[index2]) return true;
+      if (board[index2]
+      && (index2 === index1 - 7
+      || index2 === index1 - 9)) return true;
       break;
   }
   return false
