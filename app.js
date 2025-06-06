@@ -1,4 +1,5 @@
 const board = new Array(64)
+board.fill(null);
 const move = [];
 
 // white pieces
@@ -73,6 +74,10 @@ const boardClick = function(e) {
       index2 = destination[1];
     } else {
       index2 = destination[0];
+    }
+    if (index1 === index2) {
+      move.length = 0;
+      return;
     }
     board[index2] = piece;
     board[index1] = null;
