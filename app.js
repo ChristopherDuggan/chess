@@ -59,6 +59,18 @@ flipButton.addEventListener('click', flipBoard);
 
 flipBoard();
 
+const isLegal = function(piece, index1, index2) {
+  // move restrictions for pawn
+  switch (piece) {
+    case 'wP':
+      if (index2 === index1 + 8) return true;
+    case 'bP':
+      if (index2 === index1 - 8) return true;
+  }
+  return false
+
+}
+
 const boardClick = function(e) {
   if (move.length === 0 && e.target.nodeName === 'IMG') {
     move.push(e.target.id)
@@ -76,6 +88,10 @@ const boardClick = function(e) {
       index2 = destination[0];
     }
     if (index1 === index2) {
+      move.length = 0;
+      return;
+    }
+    if (!isLegal(piece, Number(index1), Number(index2))) {
       move.length = 0;
       return;
     }
