@@ -60,6 +60,8 @@ flipButton.addEventListener('click', flipBoard);
 flipBoard();
 
 const isLegal = function(piece, index1, index2) {
+  // prevent taking your own pieces
+  if (move[0][0] === move[1][0]) return false;
   // move restrictions for pawn
   switch (piece) {
     case 'wP':
