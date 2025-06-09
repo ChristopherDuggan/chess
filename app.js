@@ -1,6 +1,7 @@
 const board = new Array(64)
 board.fill(null);
 const move = [];
+let prevMove = []
 
 // white pieces
 board[0] = board[7] = 'wR';
@@ -129,6 +130,7 @@ const boardClick = function(e) {
         squares[i].appendChild(piece);
       }
     }
+    prevMove = [...move];
     move.length = 0;
   };
 };
