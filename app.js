@@ -99,6 +99,13 @@ const isLegal = function(piece, index1, index2) {
       || index2 === index1 - 10
       || index2 === index1 - 6) return true
       break;
+    case 'wB':
+    case 'bB':
+      if (move[1] === move[3] && 
+        ((index1 - index2) % 7 === 0 || (index1 - index2) % 9 === 0)
+      ) return true
+
+      break;
   }
   return false
 
@@ -107,13 +114,20 @@ const isLegal = function(piece, index1, index2) {
 const boardClick = function(e) {
   if (move.length === 0 && e.target.nodeName === 'IMG') {
     move.push(e.target.id)
-  } else if (move.length === 1) {
+  } else if (move.length === 2) {
     move.push(e.target.id)
   };
+  
+  if (e.target.classList.contains('light') 
+    || e.target.parentNode.classList.contains('light')) {
+    move.push('light');
+  } else {
+    move.push('dark');
+  }
 
-  if (move.length === 2) {
+  if (move.length === 4) {
     const [piece, index1] = move[0].split(' ');
-    const destination = move[1].split(' ');
+    const destination = move[2].split(' ');
     let index2;
     if (destination.length === 2) {
       index2 = destination[1];
