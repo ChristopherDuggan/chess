@@ -168,6 +168,17 @@ const isLegal = function(piece, index1, index2) {
         return true;
       }
       break;
+    case 'wK':
+    case 'bK':
+      if (Math.abs(index1 - index2) === 8
+        || Math.abs(index1 - index2) === 1
+        || Math.abs(index1 - index2) === 7
+        || Math.abs(index1 - index2) === 9
+      ) {
+        return true;
+      }
+
+      break;
 
     default:
       return false;
