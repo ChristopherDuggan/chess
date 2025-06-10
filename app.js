@@ -60,6 +60,17 @@ flipButton.addEventListener('click', flipBoard);
 
 flipBoard();
 
+const checkRay = function(index1, index2) {
+  const min = Math.min(index1, index2);
+  const max = Math.max(index1, index2);
+  if ((index1 - index2) % 8 === 0) {
+    for (let i = min + 8; i < max; i+= 8) {
+      if (board[i]) return false;
+    }
+  } 
+  return true;
+};
+
 const isLegal = function(piece, index1, index2) {
   // prevent taking your own pieces
   if (move[0][0] === move[2][0]) return false;
@@ -71,7 +82,9 @@ const isLegal = function(piece, index1, index2) {
       if (index2 === index1 + 16
         && index1 > 7
         && index1 < 16
-        && !board[index2]) return true;
+        && !board[index2]
+        && checkRay(index1, index2)
+      ) return true;
       if (board[index2]
       && (index2 === index1 + 7
       || index2 === index1 + 9)) return true;
@@ -81,8 +94,9 @@ const isLegal = function(piece, index1, index2) {
       && !board[index2]) return true;
       if (index2 === index1 - 16
         && index1 < 56
-        && index1 > 47
-        && !board[index2]) return true;
+        && !board[index2]
+        && checkRay(index1, index2)
+      ) return true;
       if (board[index2]
       && (index2 === index1 - 7
       || index2 === index1 - 9)) return true;
@@ -184,7 +198,7 @@ const isLegal = function(piece, index1, index2) {
       return false;
   }
 
-}
+};
 
 const boardClick = function(e) {
   if (move.length === 0 && e.target.nodeName === 'IMG') {
