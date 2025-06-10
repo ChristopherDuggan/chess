@@ -134,6 +134,42 @@ const isLegal = function(piece, index1, index2) {
         && index2 > 55 && index2 < 64) {
         return true;
       }
+      break;
+    case 'wQ':
+    case 'bQ':
+      if (move[1] === move[3] && 
+        ((index1 - index2) % 7 === 0 || (index1 - index2) % 9 === 0)
+      ) {
+        return true
+      } else if ((index1 - index2) % 8 === 0) {
+        return true;
+      } else  if (index1 < 8 && index2 < 8) {
+        return true;
+      } else if (index1 > 7 && index1 < 16
+        && index2 > 7 && index2 < 16) {
+        return true;
+      } else if (index1 > 15 && index1 < 24
+        && index2 > 15 && index2 < 24) {
+        return true;
+      } else if (index1 > 23 && index1 < 32
+        && index2 > 23 && index2 < 32) {
+        return true;
+      } else if (index1 > 31 && index1 < 40
+        && index2 > 31 && index2 < 40) {
+        return true;
+      } else if (index1 > 39 && index1 < 48
+        && index2 > 39 && index2 < 48) {
+        return true;
+      } else if (index1 > 47 && index1 < 56
+        && index2 > 47 && index2 < 56) {
+        return true;
+      } else if (index1 > 55 && index1 < 64
+        && index2 > 55 && index2 < 64) {
+        return true;
+      }
+      break;
+
+    default:
       return false;
   }
 
