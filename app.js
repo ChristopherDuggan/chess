@@ -62,7 +62,7 @@ flipBoard();
 
 const isLegal = function(piece, index1, index2) {
   // prevent taking your own pieces
-  if (move[0][0] === move[1][0]) return false;
+  if (move[0][0] === move[2][0]) return false;
   switch (piece) {
   // move restrictions for pawn
     case 'wP':
