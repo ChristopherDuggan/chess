@@ -67,7 +67,16 @@ const checkRay = function(index1, index2) {
     for (let i = min + 8; i < max; i+= 8) {
       if (board[i]) return false;
     }
-  } 
+  } else if ((index1 - index2) % 9 === 0) {
+    for (let i = min + 9; i < max; i+= 9) {
+      if (board[i]) return false;
+    }
+  } else if ((index1 - index2) % 7 === 0) {
+    for (let i = min + 7; i < max; i+= 7) {
+      if (board[i]) return false;
+    }
+
+  }
   return true;
 };
 
@@ -117,6 +126,7 @@ const isLegal = function(piece, index1, index2) {
     case 'bB':
       if (move[1] === move[3] && 
         ((index1 - index2) % 7 === 0 || (index1 - index2) % 9 === 0)
+        && checkRay(index1, index2)
       ) return true
 
       break;
