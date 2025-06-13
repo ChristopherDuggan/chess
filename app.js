@@ -175,7 +175,8 @@ const isLegal = function(piece, index1, index2) {
       break;
     case 'wQ':
     case 'bQ':
-      if (move[1] === move[3] && 
+     if (checkRay(index1, index2)) {
+        if (move[1] === move[3] && 
         ((index1 - index2) % 7 === 0 || (index1 - index2) % 9 === 0)
       ) {
         return true
@@ -205,6 +206,7 @@ const isLegal = function(piece, index1, index2) {
         && index2 > 55 && index2 < 64) {
         return true;
       }
+  }
       break;
     case 'wK':
     case 'bK':
