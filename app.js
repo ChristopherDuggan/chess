@@ -49,8 +49,8 @@ for (let i = 0; i < board.length; i++) {
 const squares = document.querySelectorAll('.square');
 
 const flipBoard = function() {
-    boardDisplay.classList.toggle('flipped');
-    squares.forEach(square => square.classList.toggle('flipped'));
+  boardDisplay.classList.toggle('flipped');
+  squares.forEach(square => square.classList.toggle('flipped'));
 };
 
 const flipButton = document.createElement('button');
@@ -76,6 +76,16 @@ const checkRay = function(index1, index2) {
       if (board[i]) return false;
     }
 
+  } else if (Math.abs(index1-index2) < 8) {
+    if (index1 < index2) {
+      for (let i = index1 + 1; i < index2; i++) {
+        if (board[i]) return false;
+      } 
+    } else {
+      for (let i = index2 + 1; i < index1; i++) {
+        if (board[i]) return false;
+      }
+    }
   }
   return true;
 };
@@ -84,10 +94,10 @@ const isLegal = function(piece, index1, index2) {
   // prevent taking your own pieces
   if (move[0][0] === move[2][0]) return false;
   switch (piece) {
-  // move restrictions for pawn
+      // pawn
     case 'wP':
       if (index2 === index1 + 8
-      && !board[index2]) return true;
+        && !board[index2]) return true;
       if (index2 === index1 + 16
         && index1 > 7
         && index1 < 16
@@ -95,33 +105,34 @@ const isLegal = function(piece, index1, index2) {
         && checkRay(index1, index2)
       ) return true;
       if (board[index2]
-      && (index2 === index1 + 7
-      || index2 === index1 + 9)) return true;
+        && (index2 === index1 + 7
+        || index2 === index1 + 9)) return true;
       break;
     case 'bP':
       if (index2 === index1 - 8
-      && !board[index2]) return true;
+        && !board[index2]) return true;
       if (index2 === index1 - 16
         && index1 < 56
         && !board[index2]
         && checkRay(index1, index2)
       ) return true;
       if (board[index2]
-      && (index2 === index1 - 7
-      || index2 === index1 - 9)) return true;
+        && (index2 === index1 - 7
+        || index2 === index1 - 9)) return true;
       break;
+      // knight
     case 'wN':
     case 'bN':
-      // + 17 + 15 + 10 + 6 - 15 -17 - 10 - 6
       if (index2 === index1 + 17
-      || index2 === index1 + 15
-      || index2 === index1 + 10
-      || index2 === index1 + 6
-      || index2 === index1 - 17
-      || index2 === index1 - 15
-      || index2 === index1 - 10
-      || index2 === index1 - 6) return true
+        || index2 === index1 + 15
+        || index2 === index1 + 10
+        || index2 === index1 + 6
+        || index2 === index1 - 17
+        || index2 === index1 - 15
+        || index2 === index1 - 10
+        || index2 === index1 - 6) return true
       break;
+      // bishop
     case 'wB':
     case 'bB':
       if (move[1] === move[3] && 
@@ -130,33 +141,36 @@ const isLegal = function(piece, index1, index2) {
       ) return true
 
       break;
+      // rook
     case 'wR':
     case 'bR':
-      if ((index1 - index2) % 8 === 0) {
-        return true;
-      } else  if (index1 < 8 && index2 < 8) {
-        return true;
-      } else if (index1 > 7 && index1 < 16
-        && index2 > 7 && index2 < 16) {
-        return true;
-      } else if (index1 > 15 && index1 < 24
-        && index2 > 15 && index2 < 24) {
-        return true;
-      } else if (index1 > 23 && index1 < 32
-        && index2 > 23 && index2 < 32) {
-        return true;
-      } else if (index1 > 31 && index1 < 40
-        && index2 > 31 && index2 < 40) {
-        return true;
-      } else if (index1 > 39 && index1 < 48
-        && index2 > 39 && index2 < 48) {
-        return true;
-      } else if (index1 > 47 && index1 < 56
-        && index2 > 47 && index2 < 56) {
-        return true;
-      } else if (index1 > 55 && index1 < 64
-        && index2 > 55 && index2 < 64) {
-        return true;
+      if (checkRay(index1, index2)) {
+        if ((index1 - index2) % 8 === 0) {
+          return true;
+        } else  if (index1 < 8 && index2 < 8) {
+          return true;
+        } else if (index1 > 7 && index1 < 16
+          && index2 > 7 && index2 < 16) {
+          return true;
+        } else if (index1 > 15 && index1 < 24
+          && index2 > 15 && index2 < 24) {
+          return true;
+        } else if (index1 > 23 && index1 < 32
+          && index2 > 23 && index2 < 32) {
+          return true;
+        } else if (index1 > 31 && index1 < 40
+          && index2 > 31 && index2 < 40) {
+          return true;
+        } else if (index1 > 39 && index1 < 48
+          && index2 > 39 && index2 < 48) {
+          return true;
+        } else if (index1 > 47 && index1 < 56
+          && index2 > 47 && index2 < 56) {
+          return true;
+        } else if (index1 > 55 && index1 < 64
+          && index2 > 55 && index2 < 64) {
+          return true;
+        }
       }
       break;
     case 'wQ':
@@ -216,7 +230,7 @@ const boardClick = function(e) {
   } else if (move.length === 2) {
     move.push(e.target.id)
   };
-  
+
   if (e.target.classList.contains('light') 
     || e.target.parentNode.classList.contains('light')) {
     move.push('light');
@@ -260,3 +274,4 @@ const boardClick = function(e) {
   };
 };
 boardDisplay.addEventListener('click', boardClick);
+
